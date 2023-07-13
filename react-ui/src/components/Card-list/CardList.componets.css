@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+h2 {
+    text-align: center;
+  }
+  
+ h2 {
+    margin: 0 auto;
+  }
+
+
+  .paragraph-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .paragraph-container p {
+    width: 50%; /* Adjust the width based on the number of <p> blocks you want side by side */
+    box-sizing: border-box;
+    padding: 10px;
+  }

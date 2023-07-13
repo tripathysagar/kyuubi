@@ -1,0 +1,14 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+.nav-container {
+    order: 1; /* Adjust the order to position it as desired */
+  }
+  
+.div-container {
+    order: 2; /* Adjust the order to position it as desired */
+  }
