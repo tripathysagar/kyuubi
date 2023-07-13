@@ -15,7 +15,8 @@ const Card = ({card}) => {
                         </tr>
                     )
                 }
-                else{}
+                return {}
+                
             })
           }
   
