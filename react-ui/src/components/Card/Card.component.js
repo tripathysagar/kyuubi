@@ -15,7 +15,7 @@ const Card = ({card}) => {
                         </tr>
                     )
                 }
-                return {}
+                
                 
             })
           }

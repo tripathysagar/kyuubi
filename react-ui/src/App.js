@@ -16,10 +16,15 @@ function App() {
     namespace: '',
     k8Name: '',
   })
-        
-  const connectToK8 = (input) => {
-    setInput({...input})
 
+  const [error, setError] = useState({
+    status: 0,
+    body: '', 
+  })
+        
+  const  connectToK8 = async(input) => {
+    setInput({...input})
+    /*
     fetch(url,{
       method: 'POST',
       headers: { 
@@ -32,20 +37,54 @@ function App() {
     .then((response) => response.json())
     .then((resp) => (localStorage.setItem('k8Details', JSON.stringify(resp)  )))
     .then(setRespFlag(true)  )
+    */
+    const response = await fetch(url,{
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'mode': '*cors',
+      },
+      
+      body: JSON.stringify(input)
+    })
+    const respStatus = response.status
 
-    //console.log(k8Details)
-  }
-  useEffect(() => {
-    if(respFlag){
-    console.log('inside use effect true')
-    
-    }else{
-    
-      console.log('inside use effect false')
-  
+    switch (respStatus){
+      case 200: //for hangling 200 from the fetch api
+        const resp = await response.json()
+        localStorage.setItem('k8Details', JSON.stringify(resp)  )
+        setRespFlag(true)
+        break
+      default:
+
+        const respBody = await response.json() 
+        //console.log(respBody)
+        
+        error.status = respStatus
+        error.body = JSON.stringify(respBody)
+
+
+        setError({...error})
+        console.log(response)
+        break
     }
 
-},[respFlag])
+    
+    //console.log(k8Details)
+  }
+
+  useEffect(() => {
+    if(respFlag){
+      console.log('inside use effect true')
+    }else{
+      console.log('inside use effect false')
+    }
+  },[respFlag])
+
+  useEffect(() => {
+    if(error.status != 0){ // for not triggering the when error.status = 0
+      alert("status : " + error.status + "\nMsg from the backend is " + error.body+ "\nPlease check the console!!!")
+  }},[error])
   
   if (!respFlag){
   return <K8Connect connectToK8={connectToK8}/>
