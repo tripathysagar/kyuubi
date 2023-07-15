@@ -82,7 +82,7 @@ function App() {
   },[respFlag])
 
   useEffect(() => {
-    if(error.status != 0){ // for not triggering the when error.status = 0
+    if(error.status !== 0){ // for not triggering the when error.status = 0
       alert("status : " + error.status + "\nMsg from the backend is " + error.body+ "\nPlease check the console!!!")
   }},[error])
   
